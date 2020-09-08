@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
+}
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+configurations {
+    testCompileOnly.extendsFrom compileOnly
+    testCompile.exclude module: "junit"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.2.0.RELEASE'
+        mavenBom 'org.junit:junit-bom:5.5.2'
+    }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testImplementation (
+            "org.junit.jupiter:junit-jupiter-api",
+            "org.junit.jupiter:junit-jupiter-params",
+    )
+
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine",
+            "ch.qos.logback:logback-classic:1.2.3"
+    )
+    testRuntime(
+            "org.junit.platform:junit-platform-launcher",
+            "org.junit.platform:junit-platform-runner",
+    )
+}
