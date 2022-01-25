@@ -43,5 +43,16 @@ public class SymmetricDifferenceTest {
         assertArrayEquals(new String[]{"One", "Three", "Four", "Six", "Seven", "Eight"}, result);
     }
 
+    @Test
+    public void standard2() {
+        int[] m = {1, 7, 5, 3, 8, 2};
+        int[] n = {5, 2, 6, 4};
+
+        String[] result = symmetricDifference.getSymmetricDifferenceAsWords(n, m);
+
+        assertArrayEquals(new String[]{"One", "Three", "Four", "Six", "Seven", "Eight"}, result);
+    }
+
+
 
 }
